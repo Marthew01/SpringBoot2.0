@@ -1,0 +1,59 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: layui
+  datasource:
+    url: jdbc:mysql://192.168.2.111:3306/layui
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+#    schema: classpath:database/import.sql
+#    sql-script-encoding: utf-8
+#    initialization-mode: ALWAYS
+  jpa:
+    database: mysql
+#    showSql: true
+    hibernate:
+      ddlAuto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:
+    cache: false
+    mode: HTML
+
+
+#MyBatis扫描mapper文件配置
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+logging:
+  config: classpath:log/logback.xml
+#  level: debug
+
+#分页
+pagehelper:
+  # dialect: ①
+  # 分页插件会自动检测当前的数据库链接，自动选择合适的分页方式（可以不设置）
+  helper-dialect: mysql
+  # 上面数据库设置后，下面的设置为true不会改变上面的结果（默认为true）
+  auto-dialect: true
+  page-size-zero: false # ②
+  reasonable: true # ③
+  # 默认值为 false，该参数对使用 RowBounds 作为分页参数时有效。（一般用不着）
+  offset-as-page-num: false
+  # 默认值为 false，RowBounds是否进行count查询（一般用不着）
+  row-bounds-with-count: false
+  #params: ④
+  #support-methods-arguments: 和params配合使用，具体可以看下面的讲解
+  # 默认值为 false。设置为 true 时，允许在运行时根据多数据源自动识别对应方言的分页
+  auto-runtime-dialect: false # ⑤
+  # 与auto-runtime-dialect配合使用
+  close-conn: true
+  # 用于控制默认不带 count 查询的方法中，是否执行 count 查询，这里设置为true后，total会为-1
+  default-count: false
+  #dialect-alias: ⑥
